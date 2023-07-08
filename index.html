@@ -95,10 +95,9 @@ var _hmt = _hmt || [];
 
         <div class="stage-container remove">
         <div class="page_two hide">
-            <div id="text" style="display:none;">&#127881赵嘉颖祝你生日快乐,2023万事如意&#127881
-<br>&emsp;&emsp;&emsp;&emsp;生活明朗   万物可爱
-<br>&emsp;&emsp;&emsp;&emsp;平安无疾   前程似锦		    
-<br>&emsp;&emsp;&emsp;&emsp;人间值得   未来可期		    
+            <div id="text" style="display:none;">&#127881庾倍丽祝你生日快乐,2023万事如意&#127881
+<br>&emsp;&emsp;&emsp;&emsp;年年岁岁，承蒙时光不弃，
+<br>&emsp;&emsp;&emsp;&emsp;岁岁年年，万喜万般皆宜。	    	    
 <br>&#127881唯愿烟花像星辰   祝你所愿皆成真&#127881
 <br>（水平有限，还请见谅&#127801）		    
 <br><br></div>
@@ -231,7 +230,48 @@ var _hmt = _hmt || [];
 	
                                 var mydate = new Date();
                                 document.writeln("Copyright&nbsp;&copy;&nbsp;2021 - " + mydate.getFullYear() + '&nbsp;<a target="_blank" href="https://www.nianbroken.top/">碎念_Nian</a><br />All&nbsp;Rights&nbsp;Reserved');
-                            </script>
+                            	<script>
+    // 获取当前时间
+    function getCurrentTime() {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = today.getMonth() + 1;
+        var date = today.getDate();
+        var hours = today.getHours();
+        var minutes = today.getMinutes();
+        var seconds = today.getSeconds();
+        var currentTime = year + "年" + month + "月" + date + "日 " + hours + ":" + minutes + ":" + seconds;
+        document.getElementById("current-time").innerHTML = "当前时间：" + currentTime;
+    }
+
+    // 更新当前时间
+    setInterval(getCurrentTime, 1000);
+
+    // 更新倒计时
+    function updateCountdown() {
+        var today = new Date();
+        var birthdayYear = 2023;
+        var birthdayMonth = 7;
+        var birthdayDate = 9;
+        var birthday = new Date(birthdayYear, birthdayMonth - 1, birthdayDate);
+        var timeDiff = birthday.getTime() - today.getTime();
+        if (timeDiff > 0) {
+            var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            var countdown = "距离生日还有：" + days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒";
+            document.getElementById("countdown").innerHTML = countdown;
+        } else {
+            document.getElementById("countdown").innerHTML = "生日快乐！";
+        }
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+</script>
+
+			    </script>
                         </p>
                     </div>
                 </div>
