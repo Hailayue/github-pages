@@ -103,6 +103,9 @@ var _hmt = _hmt || [];
 <br>（水平有限，还请见谅&#127801）		    
 <br><br></div>
             <div class="type_words" id="contents" style="font-size:1.08rem;line-height:1.5rem;"></div>
+	       <p id="current-time"></p>
+               <p id="countdown"></p>
+
         </div>
         <div class="canvas-container">
             <canvas id="trails-canvas"></canvas>
@@ -326,44 +329,40 @@ var _hmt = _hmt || [];
 	
 
 
-		function time() {
-    window.setTimeout("time()", 1000);
-    var seconds = 1000
-    var minutes = seconds * 60
-    var hours = minutes * 60
-    var days = hours * 24
-    var years = days * 365
+		function updateTime() {
     var today = new Date();
-    var todayYear = 2023;
-    var newYear = todayYear + 1;
-    var lastYear = todayYear - 1;
-    var todayMonth = 7;
-    var todayDate = 9;
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth() + 1;
+    var todayDate = today.getDate();
     var todayHour = today.getHours();
     var todayMinute = today.getMinutes();
     var todaySecond = today.getSeconds();
-
-    var t1 = Date.UTC(newYear, 1, 1, 0, 00, 00)
-    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond)
-    var diff = t1 - t2
-    var diff2 = t2-t1
-    var diffYears = Math.floor(diff / years)
-    var diffDays = Math.floor((diff / days) - diffYears * 365)
-    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours)
-    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes)
-    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes *
-        minutes) / seconds)
-    var diff2Years = Math.floor(diff2 / years)
-    var diff2Days = Math.floor((diff2 / days) - diff2Years * 365)
-    var diff2Hours = Math.floor((diff2 - (diff2Years * 365 + diff2Days) * days) / hours)
-    var diff2Minutes = Math.floor((diff2 - (diff2Years * 365 + diff2Days) * days - diff2Hours * hours) / minutes)
-    var diff2Seconds = Math.floor((diff2 - (diff2Years * 365 + diff2Days) * days - diff2Hours * hours - diff2Minutes *
-        minutes) / seconds)
-     if(todayMonth==1){if(todayDate==1){document.getElementById("text1").innerHTML =  "现在是7月9日,祝你生日快乐！"}}
-     else{document.getElementById("text1").innerHTML =  "提前祝你生日快乐"}
-     //document.getElementById("time").innerHTML =  diffDays + "天" + diffHours + "小时" + diffMinutes + "分钟" + diffSeconds + "秒"+newYear
+    
+    var currentTime = todayYear + "年" + todayMonth + "月" + todayDate + "日 " + todayHour + ":" + todayMinute + ":" + todaySecond;
+    document.getElementById("current-time").innerHTML = "当前时间：" + currentTime;
+    
+    var birthdayYear = 2023;
+    var birthdayMonth = 7;
+    var birthdayDate = 9;
+    
+    var birthday = new Date(birthdayYear, birthdayMonth - 1, birthdayDate);
+    var timeDiff = birthday.getTime() - today.getTime();
+    if (timeDiff > 0) {
+        var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        var countdown = "距离生日还有：" + days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒";
+        document.getElementById("countdown").innerHTML = countdown;
+    } else {
+        document.getElementById("countdown").innerHTML = "生日快乐！";
+    }
+    
+    setTimeout(updateTime, 1000);
 }
-time()
+
+updateTime();
+
 </script>
 	
 
